@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Predict Disease</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial;
+            background: url("{{ url_for('static', filename='sheep.jpg') }}") no-repeat center center/cover;
+        }
+
+        .overlay {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(6px);
+            background: rgba(0,0,0,0.4);
+        }
+
+        .card {
+            position: relative;
+            z-index: 2;
+            width: 450px;
+            margin: 50px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 8px;
+        }
+
+        .symptoms {
+            text-align: left;
+        }
+
+        button {
+            background: #28a745;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #218838;
+        }
+
+        #result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            background: #f4f6f9;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="overlay"></div>
+
+<div class="card">
+
+    <h1>🧠 Predict Disease</h1>
+
+    <form id="predictForm" enctype="multipart/form-data">
+
+        <!-- Animal -->
+        <label>Animal</label>
+        <select name="animal">
+            <option value="Cow">Cow</option>
+            <option value="Goat">Goat</option>
+            <option value="Sheep">Sheep</option>
+            <option value="Buffalo">Buffalo</option>
+            <option value="Hen">Hen</option>
+        </select>
+
+        <!-- Symptoms -->
+        <h3>Symptoms</h3>
+        <div class="symptoms">
+            <label><input type="checkbox" name="fever"> Fever</label><br>
+            <label><input type="checkbox" name="cough"> Cough</label><br>
+            <label><input type="checkbox" name="diarrhea"> Diarrhea</label><br>
+            <label><input type="checkbox" name="appetite"> Loss of Appetite</label><br>
+            <label><input type="checkbox" name="weakness"> Weakness</label><br>
+            <label><input type="checkbox" name="skin"> Skin Lesions</label><br>
+            <label><input type="checkbox" name="vomiting"> Vomiting</label>
+        </div>
+<label>Other Symptoms</label>
+<textarea name="extra" placeholder="Enter any additional symptoms..." 
+style="width:100%; padding:10px; border-radius:8px;"></textarea>
+        <!-- Extra Inputs -->
+        <label>Age</label>
+        <input type="number" name="age" value="2">
+
+        <label>Weight (kg)</label>
+        <input type="number" name="weight" placeholder="Enter weight">
+
+        <label>Vaccination</label>
+        <select name="vaccine">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <!-- IMAGE UPLOAD -->
+        <label>Upload Animal Image</label>
+        <input type="file" name="image" accept="image/*">
+
+        <button type="submit">🔍 Predict</button>
+
+    </form>
+
+    <!-- RESULT -->
+    <div id="result"></div>
+
+</div>
+
+<script>
+document.getElementById("predictForm").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    let formData = new FormData(this);
+
+    fetch("/predict-image", {
+        method: "POST",
+        body: formData
+    })
+    .then(res => res.json())
+    .then(data => {
+        document.getElementById("result").innerHTML =
+            "<b>Disease:</b> " + data.disease +
+            "<br><b>Advice:</b> " + data.advice +
+            "<br><b>Confidence:</b> " + data.confidence + "%";
+    });
+});
+</script>
+
+</body>
+</html>

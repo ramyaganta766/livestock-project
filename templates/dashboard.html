@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+
+    <!-- ✅ LINK CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body class="dashboard">
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <h2>🐄 Menu</h2>
+<a href="/dashboard">🏠 Home</a>
+<a href="/predict">🧠 Predict</a>
+<a href="/about">ℹ️ About</a>
+<a href="/contact">📞 Contact</a>
+<a href="/statistics">📊 Statistics</a>  <!-- ADD HERE -->
+<a href="/logout">🚪 Logout</a>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+<h1>🐄 Livestock Disease Awareness</h1>
+
+<div class="cards">
+
+<div class="card">
+    <img src="{{ url_for('static', filename='cow.jpg') }}">
+    <h3>Lumpy Skin Disease</h3>
+    <p>🔴 High Risk</p>
+    <p>Affects cattle, causes skin nodules</p>
+</div>
+
+<div class="card">
+    <img src="{{ url_for('static', filename='sheep.jpg') }}">
+    <h3>Foot & Mouth Disease</h3>
+    <p>🔴 High Risk</p>
+    <p>Highly contagious viral disease</p>
+</div>
+
+<div class="card">
+    <img src="{{ url_for('static', filename='goat.jpg') }}">
+    <h3>PPR Disease</h3>
+    <p>🟠 Medium Risk</p>
+    <p>Common in goats and sheep</p>
+</div>
+
+<div class="card">
+    <img src="{{ url_for('static', filename='hen.jpg') }}">
+    <h3>Bird Flu</h3>
+    <p>🔴 High Risk</p>
+    <p>Dangerous poultry disease</p>
+</div>
+
+<div class="card">
+    <img src="{{ url_for('static', filename='buffalo.jpg') }}">
+    <h3>Buffalo Infection</h3>
+    <p>🟠 Medium Risk</p>
+    <p>Common bacterial infections in buffalo</p>
+</div>
+
+</div>
+
+</div>
+
+</body>
+@app.route('/admin-dashboard')
+def admin_dashboard():
+    if 'admin' not in session:
+        return redirect('/admin')
+
+    conn = sqlite3.connect('users.db')
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT * FROM users")
+    users = cursor.fetchall()
+
+    conn.close()
+
+    return render_template('admin_dashboard.html', users=users)
+<h2>📊 Statistics</h2>
+<a href="/statistics">📊 Statistics</a>
+
+<div class="stats-grid">
+
+    <div class="stat-card">
+        <h4>Disease vs Risk</h4>
+        <p>Lumpy Skin → High</p>
+        <p>Foot & Mouth → High</p>
+        <p>PPR → Medium</p>
+    </div>
+
+    <div class="stat-card">
+        <h4>Animal Death (Year)</h4>
+        <p>2021 → 12%</p>
+        <p>2022 → 18%</p>
+        <p>2023 → 25%</p>
+        <p>2024 → 15%</p>
+    </div>
+
+    <div class="stat-card">
+        <h4>Vet Support</h4>
+        <p>No Vet → High Risk</p>
+        <p>With Vet → Reduced Risk</p>
+    </div>
+
+    <div class="stat-card">
+        <h4>App Impact</h4>
+        <p>Fast detection ⚡</p>
+        <p>Less animal death 📉</p>
+        <p>Better farming 👨‍🌾</p>
+    </div>
+@app.route('/admin-dashboard')
+def admin_dashboard():
+
+    if 'admin' not in session:
+        return redirect('/login')
+
+    conn = sqlite3.connect('users.db')
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT * FROM users")
+    users = cursor.fetchall()
+
+    conn.close()
+
+    return render_template('admin_dashboard.html', users=users)
+
+</div>
+</html>

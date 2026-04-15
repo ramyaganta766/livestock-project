@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Contact</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="dashboard">
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <h2>🐄 Menu</h2>
+    <a href="/dashboard">🏠 Home</a>
+    <a href="/old">🧠 Predict</a>
+    <a href="/dashboard#stats">📊 Statistics</a>
+    <a href="/about">ℹ️ About</a>
+    <a href="/contact">📞 Contact</a>
+    <a href="/logout">🚪 Logout</a>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+    <h1>📞 Contact Us</h1>
+
+    <!-- DEVELOPER INFO -->
+    <div class="card">
+        <h3>👩‍💻 Developer Info</h3>
+
+        <p><strong>Name:</strong> Ramya Ganta</p>
+
+        <p><strong>Email:</strong> 
+            <a href="mailto:ramyaganta766@gmail.com">
+                ramyaganta766@gmail.com
+            </a>
+        </p>
+
+        <p><strong>Phone:</strong> 
+            <a href="tel:9492005503">
+                +91 9492005503
+            </a>
+        </p>
+
+        <p><strong>Location:</strong> India</p>
+    </div>
+
+    <!-- CONTACT FORM -->
+    <div class="card">
+        <h3>💬 Send Message</h3>
+
+        <input type="text" placeholder="Your Name"><br><br>
+
+        <input type="email" placeholder="Your Email"><br><br>
+
+        <textarea rows="4" placeholder="Your Message"></textarea><br><br>
+
+        <button>Send Message</button>
+    </div>
+</div>
+
+</body>
+</html>

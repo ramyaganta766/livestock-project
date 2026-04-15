@@ -1,0 +1,269 @@
+/* GENERAL */
+body {
+    margin: 0;
+    font-family: Arial;
+}
+
+/* LOGIN PAGE */
+.login-page {
+    background: #f4f6f9;
+    height: 100vh;
+}
+
+.login-page {
+    background: url('/static/calf.jpg') no-repeat center center/cover;
+}
+.login-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    width: 300px;
+    text-align: center;
+}
+
+.login-box input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.login-box button {
+    width: 100%;
+    padding: 10px;
+    background: #ff5a5a;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 220px;
+    height: 100vh;
+    background: #2c3e50;
+    color: white;
+    position: fixed;
+    padding: 20px;
+}
+
+.sidebar a {
+    display: block;
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+}
+
+.sidebar a:hover {
+    background: #34495e;
+}
+
+/* MAIN */
+.main {
+    margin-left: 240px;
+    padding: 20px;
+}
+
+/* CARDS */
+.cards {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.card {
+    width: 220px;
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.card img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* PREDICT PAGE */
+.predict-bg {
+    background: #f4f6f9;
+    min-height: 100vh;
+    overflow-y: auto;
+}
+
+/* CONTAINER */
+.predict-container {
+    padding: 30px;
+    text-align: center;
+}
+
+/* CARD */
+.predict-card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    width: 400px;
+    margin: auto;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+/* INPUTS */
+.predict-card input,
+.predict-card select,
+.predict-card textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 8px;
+}
+
+/* GRID */
+.symptoms-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    text-align: left;
+}
+
+/* BUTTON */
+.predict-card button {
+    background: #28a745;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.predict-card button:hover {
+    background: #218838;
+}
+
+/* RESULT */
+.result-box {
+    margin-top: 20px;
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* LOADING */
+.loading {
+    display: none;
+    font-size: 18px;
+    color: white;
+    background: black;
+    padding: 10px;
+    border-radius: 10px;
+    width: 300px;
+    margin: 20px auto;
+}
+/* SIDE BACKGROUND IMAGES */
+.predict-bg {
+    background: #f4f6f9;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* LEFT SIDE IMAGE */
+.predict-bg::before {
+    content: "";
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 30%;
+    height: 100%;
+    background: url('/static/cow.jpg') no-repeat center/cover;
+    opacity: 0.3;   /* 🔥 light effect */
+    z-index: 0;
+}
+
+/* RIGHT SIDE IMAGE */
+.predict-bg::after {
+    content: "";
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 30%;
+    height: 100%;
+    background: url('/static/goat.jpg') no-repeat center/cover;
+    opacity: 0.3;
+    filter: blur(2px);
+    z-index: 0;
+}
+
+/* KEEP CARD ABOVE IMAGES */
+.predict-container {
+    position: relative;
+    z-index: 2;
+}
+/* ABOUT PAGE BACKGROUND */
+.about-bg {
+    background: url('/static/sheep.jpg') no-repeat center center/cover;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* BLUR OVERLAY */
+.about-bg::before {
+    content: "";
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(5px);
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+/* CONTENT */
+.about-container {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 40px;
+}
+
+/* CARD */
+.about-card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    width: 500px;
+    margin: auto;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    text-align: left;
+}
+/* ================= STATISTICS ================= */
+
+.stats-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.stat-card {
+    background: #f8f9fa;
+    padding: 15px;
+    width: 220px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    text-align: left;
+    transition: 0.3s;
+}
+
+.stat-card:hover {
+    transform: scale(1.05);
+    background: #eaf7ea;
+}

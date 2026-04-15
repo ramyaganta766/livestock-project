@@ -1,0 +1,10 @@
+animal,fever,cough,diarrhea,skin_lesions,weakness,disease
+Cow,1,0,0,1,1,Lumpy Skin Disease
+Cow,1,1,0,0,1,Fever Infection
+Goat,0,0,1,0,1,PPR Disease
+Sheep,0,1,0,0,1,Pneumonia
+Hen,0,1,0,0,0,Bird Flu
+Cow,1,0,1,0,1,Severe Infection
+Goat,0,0,1,0,0,Diarrhea Disease
+Sheep,0,1,0,0,0,Respiratory Infection
+Hen,0,1,0,0,1,Viral Infection

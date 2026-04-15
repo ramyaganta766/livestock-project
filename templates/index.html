@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Predict Disease</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body class="predict-bg">
+
+<div class="predict-container">
+
+    <h1>🐄 Smart Disease Prediction</h1>
+
+    <form id="predictForm" enctype="multipart/form-data" class="predict-card">
+
+        <!-- Animal -->
+        <label>Animal Type</label>
+        <select name="animal">
+            <option value="Cow">Cow</option>
+            <option value="Goat">Goat</option>
+            <option value="Sheep">Sheep</option>
+            <option value="Buffalo">Buffalo</option>
+            <option value="Hen">Hen</option>
+        </select>
+
+        <!-- Symptoms -->
+        <h3>Symptoms</h3>
+
+        <div class="symptoms-grid">
+            <label><input type="checkbox" name="fever"> Fever</label>
+            <label><input type="checkbox" name="cough"> Cough</label>
+            <label><input type="checkbox" name="diarrhea"> Diarrhea</label>
+            <label><input type="checkbox" name="appetite"> Appetite Loss</label>
+            <label><input type="checkbox" name="weakness"> Weakness</label>
+            <label><input type="checkbox" name="skin"> Skin Lesions</label>
+            <label><input type="checkbox" name="vomiting"> Vomiting</label>
+        </div>
+
+        <!-- Extra -->
+        <label>Other Symptoms</label>
+        <textarea name="extra"></textarea>
+
+        <!-- Age -->
+        <label>Age</label>
+        <input type="number" name="age" value="2">
+
+        <!-- Vaccine -->
+        <label>Vaccination</label>
+        <select name="vaccine">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <!-- Image Upload -->
+        <label>Upload Animal Image</label>
+        <input type="file" name="image">
+
+        <!-- Button -->
+        <button type="submit">🔍 Predict Disease</button>
+
+    </form>
+
+    <!-- LOADING -->
+    <div id="loading" class="loading">Analyzing animal health...</div>
+
+    <!-- RESULT -->
+    <div id="result" class="result-box">
+        <h2>Prediction Result</h2>
+        <p id="disease"></p>
+        <p id="advice"></p>
+        <p id="confidence"></p>
+    </div>
+
+</div>
+
+<script>
+document.getElementById("predictForm").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    let formData = new FormData(this);
+
+    document.getElementById("loading").style.display = "block";
+    document.getElementById("result").style.display = "none";
+
+    fetch("/predict-image", {
+        method: "POST",
+        body: formData
+    })
+    .then(res => res.json())
+    .then(data => {
+
+        document.getElementById("loading").style.display = "none";
+        document.getElementById("result").style.display = "block";
+
+        document.getElementById("disease").innerText = "Disease: " + data.disease;
+        document.getElementById("advice").innerText = "Advice: " + data.advice;
+        document.getElementById("confidence").innerText = "Confidence: " + data.confidence + "%";
+
+        let box = document.getElementById("result");
+
+        if(data.confidence > 85){
+            box.style.border = "3px solid red";
+        } else {
+            box.style.border = "3px solid green";
+        }
+
+    });
+});
+</script>
+
+</body>
+</html>
