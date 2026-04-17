@@ -12,18 +12,34 @@ model = pickle.load(open("model.pkl", "rb"))
 def get_db():
     return sqlite3.connect('users.db')
 
+def create_table():
+    conn = sqlite3.connect('users.db')
+    cursor = conn.cursor()
+cursor.execute('''
+CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    email TEXT,
+    password TEXT
+)
+''')
+    conn.commit()
+    conn.close()
+create_table()
+
 # ================= HOME =================
 @app.route('/')
 def home():
     return render_template('login.html')
+
+
 
 # ================= LOGIN =================
 @app.route('/login', methods=['GET', 'POST'])
 def login():
 
     if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
+      email = request.form['email']
+password = request.form['password']
 
         # 🔥 ADMIN LOGIN
         if username == "admin" and password == "admin123":
@@ -34,18 +50,39 @@ def login():
         conn = get_db()
         cursor = conn.cursor()
 
-        cursor.execute("SELECT * FROM users WHERE username=? AND password=?", (username, password))
+        cursor.execute("SELECT * FROM users WHERE email=?", (email,))
         user = cursor.fetchone()
 
         conn.close()
 
         if user:
-            session['user'] = username
+            session['user'] = email
             return redirect('/dashboard')
         else:
             return render_template('login.html', error="Invalid Login")
 
     return render_template('login.html')
+
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+
+    if request.method == 'POST':
+      
+       email = request.form['email']
+       password = request.form['password']
+
+
+        conn = get_db()
+        cursor = conn.cursor()
+
+        cursor.execute("INSERT INTO users (email, password) VALUES (?, ?)", (email, password))
+        conn.commit()
+        conn.close()
+
+        return redirect('/login')
+
+    return render_template('signup.html')
+
 # ================= DASHBOARD =================
 @app.route('/dashboard')
 def dashboard():
